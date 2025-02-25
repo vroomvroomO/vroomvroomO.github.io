@@ -1,0 +1,43 @@
+<manifest alg="2" build="2018.1.0.386" opt="false" iceEnabled="true" iceMarkupVersion="2" iceEnabledOptions="link,responsive,cachebuster,textStyling" exportTarget="other" domain="fhwfwhfbewufeuywfe-ejfb.fuew" resolutions="1x" timestamp="1740502849720">
+  <folder name="css">
+    <file name="site_global.css" crc="444006867"/>
+    <file name="index.css" crc="340149351" ref="index"/>
+  </folder>
+  <folder name="scripts">
+    <file name="jquery-1.8.3.min.js" crc="209076791" ref="phone>index:phone>g:index"/>
+    <file name="museutils.js" crc="340535759" ref="phone>index:phone>g:index"/>
+    <file name="whatinput.js" crc="86476730" ref="phone>index:phone>g:index"/>
+    <file name="museconfig.js" crc="4286661555" ref="phone>index:phone>g:index"/>
+    <file name="require.js" crc="7928878" ref="phone>index:phone>g:index"/>
+    <file name="jquery.watch.js" crc="51536988" ref="index"/>
+  </folder>
+  <folder name="images">
+    <file name="vvn.png" crc="4161011225" seo="true" ref="phone>index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="asset 3.png" crc="74371095" seo="true" ref="phone>index:phone>g">
+      <caption webpage="index" alt=""/>
+      <caption webpage="g" alt=""/>
+    </file>
+    <file name="asset 1.png" crc="49732375" seo="true" ref="phone>index:phone>g">
+      <caption webpage="index" alt=""/>
+      <caption webpage="g" alt=""/>
+    </file>
+    <file name="exp.png" crc="3810778766" seo="true" ref="phone>index:phone>g">
+      <caption webpage="index" alt=""/>
+      <caption webpage="g" alt=""/>
+    </file>
+    <file name="asset 2.png" crc="402338360" seo="true" ref="phone>g">
+      <caption webpage="g" alt=""/>
+    </file>
+  </folder>
+  <folder name="phone">
+    <folder name="css">
+      <file name="index.css" crc="312698063" ref="phone>index"/>
+      <file name="g.css" crc="3836579882" ref="phone>g"/>
+    </folder>
+    <file name="index.html" crc="3923598979" seo="true" mt="1740502711707" redirect="true"/>
+    <file name="g.html" crc="4250933352" seo="true" mt="1740502771712" redirect="true"/>
+  </folder>
+  <file name="index.html" crc="362744766" seo="true" mt="1740501956635" redirect="true"/>
+</manifest>
