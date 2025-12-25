@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Young. Sexy. Iconic. - Gallery</title>
+    <style>
+        /* --- RESET E BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: auto; 
+        }
+
+        /* --- BACKGROUND (Fisso) --- */
+        .bg-image {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /* TUA FOTO DI SFONDO */
+            background-image: url('/sfondo.jpeg'); 
+            background-size: cover; background-position: center; z-index: -2;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.8));
+            z-index: -1;
+        }
+
+        /* --- LAYOUT CONTAINER --- */
+        .container {
+            position: relative; z-index: 1; min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 2rem 1.5rem 2rem 1.5rem;
+        }
+
+        /* --- HEADER --- */
+        .header-small {
+            margin-bottom: 2rem; display: flex; align-items: center; gap: 10px; opacity: 0.8;
+        }
+        .logo-small { height: 40px; width: auto; }
+        
+        h2 { 
+            color: white; 
+            margin-bottom: 2rem; 
+            font-weight: 700; 
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        
+        p {
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* --- FEED FOTO (VERTICALE) --- */
+        .gallery-feed {
+            display: flex;
+            flex-direction: column; /* Una sotto l'altra */
+            gap: 25px; /* Spazio tra le foto */
+            width: 100%;
+            max-width: 450px; /* Larghezza massima simile a un post Instagram */
+            margin-bottom: 4rem;
+        }
+
+        /* L'elemento quadrato */
+        .gallery-item {
+            position: relative; /* Fondamentale per posizionare il badge */
+            width: 100%;
+            aspect-ratio: 1 / 1; /* FORZA IL QUADRATO PERFETTO */
+            border-radius: 16px; /* Bordi arrotondati moderni */
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* Ombra per dare profondità */
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            background-color: rgba(255,255,255,0.1); /* Colore di caricamento */
+        }
+
+        /* Effetto click */
+        .gallery-item:active { transform: scale(0.96); }
+
+        /* La foto miniatura */
+        .thumb-img {
+            width: 100%; height: 100%;
+            object-fit: cover; /* Taglia l'immagine per riempire il quadrato */
+            display: block;
+        }
+
+        /* --- IL NUOVO BADGE PLAY (Solo triangolo) --- */
+        .video-badge {
+            position: absolute;
+            bottom: 15px; /* Distanza dal fondo */
+            right: 15px;  /* Distanza da destra */
+            color: white; /* Solo il colore bianco */
+            font-size: 16px; /* Dimensione del triangolino */
+            pointer-events: none;
+            /* Una leggera ombreggiatura per farlo risaltare se la foto sotto è chiara */
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5); 
+        }
+
+        /* --- BACK BUTTON --- */
+        .btn-back {
+            display: inline-block; padding: 12px 24px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white; border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px; text-decoration: none; font-size: 0.9rem;
+            backdrop-filter: blur(5px); margin-top: auto;
+        }
+
+        /* --- MODAL VIDEO (Uguale a prima) --- */
+        .video-modal {
+            display: none;
+            position: fixed; z-index: 1000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            align-items: center; justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content-wrapper {
+            position: relative; width: 100%; max-width: 800px;
+        }
+
+        video.modal-video {
+            width: 100%; height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-height: 80vh;
+        }
+
+        .close-btn {
+            position: absolute; top: -45px; right: 0;
+            color: white; font-size: 35px; font-weight: bold;
+            cursor: pointer; z-index: 1001; padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-image"></div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <header class="header-small">
+            <img src="/logo.png" alt="Logo" class="logo-small">
+        </header>
+        
+        <h2>Media Gallery</h2>
+        <p> Clicca ▶ per aprire i video, stupid bitch...</p>
+
+        <div class="gallery-feed">
+            
+            <div class="gallery-item">
+                <img src="/PG1.png" alt="Foto 1" class="thumb-img">
+            </div>
+            
+            <div class="gallery-item">
+                <img src="back.png" alt="track list" class="thumb-img">
+            </div>
+
+            <div class="gallery-item" >
+                <img src="PG2.png" alt="Foto 2" class="thumb-img">
+               
+            </div>
+
+             <div class="gallery-item" >
+                <img src="PG3.png" alt="Foto 3" class="thumb-img">
+               
+            </div>
+
+             <div class="gallery-item" onclick="openVideo('video4')">
+                <img src="PG4_martina.png" alt="Foto 4" class="thumb-img">
+                <div class="video-badge">▶</div>
+            </div>
+             <div class="gallery-item" onclick="openVideo('video2')">
+                <img src="PG4_marco.png" alt="Foto 2" class="thumb-img">
+                <div class="video-badge">▶</div>
+            </div>
+
+             <div class="gallery-item" onclick="openVideo('video3')">
+                <img src="pg5.png" alt="Foto 3" class="thumb-img">
+                <div class="video-badge">▶</div>
+            </div>
+
+             <div class="gallery-item" onclick="openVideo('video4')">
+                <img src="PG6.png" alt="Foto 4" class="thumb-img">
+                <div class="video-badge">▶</div>
+            </div>
+             <div class="gallery-item" onclick="openVideo('video4')">
+                <img src="PG7.png" alt="Foto 4" class="thumb-img">
+                <div class="video-badge">▶</div>
+            </div>
+             <div class="gallery-item" onclick="openVideo('video4')">
+                <img src="PG8.png" alt="Foto 4" class="thumb-img">
+                <div class="video-badge">▶</div>
+            </div>
+             
+            <div class="gallery-item" onclick="openVideo('video4')">
+                <img src="PG9.png" alt="Foto 4" class="thumb-img">
+                <div class="video-badge">▶</div>
+            </div>
+            <div class="gallery-item">
+                <img src="PG10.png" alt="Foto 4" class="thumb-img">
+                
+            </div>
+
+        </div>
+
+
+        <a href="index.html" class="btn-back">← Torna alla Home</a>
+
+    </div>
+
+
+    <div id="video1" class="video-modal">
+        <div class="modal-content-wrapper">
+            <span class="close-btn" onclick="closeVideo('video1')">&times;</span>
+            <video controls class="modal-video">
+                <source src="" type="video/mp4"> 
+            </video>
+        </div>
+    </div>
+
+    <div id="video2" class="video-modal">
+        <div class="modal-content-wrapper">
+            <span class="close-btn" onclick="closeVideo('video2')">&times;</span>
+            <video controls class="modal-video">
+                <source src="" type="video/mp4">
+            </video>
+        </div>
+    </div>
+    
+    <div id="video3" class="video-modal">
+        <div class="modal-content-wrapper">
+            <span class="close-btn" onclick="closeVideo('video3')">&times;</span>
+            <video controls class="modal-video">
+                <source src="" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <div id="video4" class="video-modal">
+        <div class="modal-content-wrapper">
+            <span class="close-btn" onclick="closeVideo('video4')">&times;</span>
+            <video controls class="modal-video">
+                <source src="" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+
+    <script>
+        function openVideo(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "flex";
+                const video = modal.querySelector('video');
+                if(video) video.play(); // Parte in automatico quando clicchi la foto
+            }
+        }
+
+        function closeVideo(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "none";
+                const video = modal.querySelector('video');
+                if(video) {
+                    video.pause();
+                    video.currentTime = 0;
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
