@@ -2,7 +2,12 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <title>Young. Sexy. Iconic. - Home</title>
     <style>
         /* --- RESET E BASE --- */
@@ -17,6 +22,7 @@
             height: 100vh;
             width: 100%;
             overflow: hidden;
+            background-color: black; /* Evita bordi bianchi durante il caricamento */
         }
 
         /* --- BACKGROUND --- */
@@ -52,33 +58,37 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem 1.5rem 4rem 1.5rem;
+            
+            /* MODIFICA 3: Padding dinamico per la Safe Area */
+            padding-top: max(2rem, env(safe-area-inset-top));     /* Protegge dalla Notch */
+            padding-bottom: max(4rem, env(safe-area-inset-bottom)); /* Protegge dalla barra Home */
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
         }
 
-        /* --- LOGO AREA (MODIFICATA) --- */
+        /* --- LOGO AREA --- */
         .logo-area {
             margin-top: 1.5rem;
             display: flex;
-            flex-direction: column; /* Mette le immagini una sotto l'altra */
+            flex-direction: column; 
             align-items: center;
-            gap: 10px; /* Spazio tra Logo e Payoff */
+            gap: 10px; 
         }
 
         /* Stile per il Logo principale */
         .logo-img {
-            width: 100px; /* Larghezza del logo - modificabile */
-            height: auto; /* Mantiene le proporzioni */
+            width: 100px; 
+            height: auto; 
             display: block;
-            /* Rimuovi il filtro ombra se il tuo logo � scuro */
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); 
         }
 
-        /* Stile per il Payoff (immagine sotto) */
+        /* Stile per il Payoff */
         .payoff-img {
-            width: 140px; /* Larghezza del payoff - solitamente un po' pi� largo */
+            width: 140px; 
             height: auto;
             display: block;
-            opacity: 0.9; /* Leggera trasparenza per eleganza */
+            opacity: 0.9; 
         }
 
         /* --- CONTENUTO CENTRALE E BOTTONI --- */
@@ -114,9 +124,8 @@
             text-align: center;
             margin-bottom: 1.5rem;
             font-size: 0.5rem;
-            line-height: 0,1;
+            line-height: 0.1; /* Ho corretto la virgola in punto */
         }
-
 
         /* --- PULSANTI --- */
         .btn {
@@ -161,9 +170,9 @@
         
         <header class="logo-area">
             <img src="logo.png" alt="Logo" class="logo-img">
-            
             <img src="mg.png" alt="Payoff" class="payoff-img">
         </header>
+
         <main class="content-area">
             <h1>Solo per my <br>Martina e Marco</h1>
             <p>You guys are so hot btw...</p>
@@ -172,9 +181,7 @@
             <a href="Music.html" class="btn btn-secondary">Stream</a>
         </main>
 
-      
     </div>
-
     
 </body>
 </html>
