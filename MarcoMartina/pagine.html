@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Young. Sexy. Iconic. - Gallery</title>
     <style>
-        /* --- RESET E BASE --- */
+        /* --- STILI --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
@@ -16,97 +16,58 @@
             overflow-y: auto; 
         }
 
-        /* --- BACKGROUND (Fisso) --- */
+        /* Sfondo */
         .bg-image {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            /* TUA FOTO DI SFONDO */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('sfondo.jpeg'); 
             background-size: cover; background-position: center; z-index: -2;
         }
         
         .overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.8));
             z-index: -1;
         }
 
-        /* --- LAYOUT CONTAINER --- */
+        /* Container */
         .container {
             position: relative; z-index: 1; min-height: 100vh;
             display: flex; flex-direction: column; align-items: center;
             padding: 2rem 1.5rem 2rem 1.5rem;
         }
 
-        /* --- HEADER --- */
-        .header-small {
-            margin-bottom: 2rem; display: flex; align-items: center; gap: 10px; opacity: 0.8;
-        }
+        /* Header */
+        .header-small { margin-bottom: 2rem; display: flex; align-items: center; gap: 10px; opacity: 0.8; }
         .logo-small { height: 40px; width: auto; }
         
-        h2 { 
-            color: white; 
-            margin-bottom: 2rem; 
-            font-weight: 700; 
-            font-size: 1.8rem;
-            text-align: center;
-        }
-        
-        p {
-            color: rgba(255, 255, 255, 0.9);
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
+        h2 { color: white; margin-bottom: 2rem; font-weight: 700; font-size: 1.8rem; text-align: center; }
+        p { color: rgba(255, 255, 255, 0.9); text-align: center; margin-bottom: 1.5rem; font-size: 1rem; line-height: 1.5; }
 
-        /* --- FEED FOTO (VERTICALE) --- */
+        /* Griglia Foto */
         .gallery-feed {
-            display: flex;
-            flex-direction: column; /* Una sotto l'altra */
-            gap: 25px; /* Spazio tra le foto */
-            width: 100%;
-            max-width: 450px; /* Larghezza massima simile a un post Instagram */
-            margin-bottom: 4rem;
+            display: flex; flex-direction: column; gap: 25px;
+            width: 100%; max-width: 450px; margin-bottom: 4rem;
         }
 
-        /* L'elemento quadrato */
         .gallery-item {
-            position: relative; /* Fondamentale per posizionare il badge */
-            width: 100%;
-            aspect-ratio: 1 / 1; /* FORZA IL QUADRATO PERFETTO */
-            border-radius: 16px; /* Bordi arrotondati moderni */
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* Ombra per dare profondità */
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            background-color: rgba(255,255,255,0.1); /* Colore di caricamento */
+            position: relative; width: 100%; aspect-ratio: 1 / 1;
+            border-radius: 16px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            cursor: pointer; transition: transform 0.2s ease;
+            background-color: rgba(255,255,255,0.1);
         }
-
-        /* Effetto click */
         .gallery-item:active { transform: scale(0.96); }
 
-        /* La foto miniatura */
-        .thumb-img {
-            width: 100%; height: 100%;
-            object-fit: cover; /* Taglia l'immagine per riempire il quadrato */
-            display: block;
-        }
+        .thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-        /* --- IL NUOVO BADGE PLAY (Solo triangolo) --- */
+        /* Badge Play */
         .video-badge {
-            position: absolute;
-            bottom: 15px; /* Distanza dal fondo */
-            right: 15px;  /* Distanza da destra */
-            color: white; /* Solo il colore bianco */
-            font-size: 16px; /* Dimensione del triangolino */
-            pointer-events: none;
-            /* Una leggera ombreggiatura per farlo risaltare se la foto sotto è chiara */
+            position: absolute; bottom: 15px; right: 15px; 
+            color: white; font-size: 16px; pointer-events: none;
             text-shadow: 0 1px 3px rgba(0,0,0,0.5); 
         }
 
-        /* --- BACK BUTTON (Quello in basso) --- */
+        /* Pulsante Indietro (Basso) */
         .btn-back {
             display: inline-block; padding: 12px 24px;
             background-color: rgba(255, 255, 255, 0.1);
@@ -115,58 +76,34 @@
             backdrop-filter: blur(5px); margin-top: auto;
         }
 
-        /* --- NUOVO HOME BUTTON (Alto a Sinistra - Stile Glass) --- */
+        /* Pulsante Home (Alto Sinistra) */
         .home-btn-top {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            
-            /* Stile Trasparenza "Glass" */
-            background-color: rgba(0, 0, 0, 0.4); /* Nero trasparente */
-            backdrop-filter: blur(10px);          /* Sfocatura sfondo */
-            -webkit-backdrop-filter: blur(10px);
+            position: fixed; top: 20px; left: 20px;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            
+            color: white; width: 50px; height: 50px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             transition: transform 0.3s ease, background-color 0.3s;
-            z-index: 1000;
-            text-decoration: none;
+            z-index: 1000; text-decoration: none;
         }
+        .home-btn-top:hover { transform: scale(1.1); background-color: rgba(0, 0, 0, 0.6); }
 
-        .home-btn-top:hover {
-            transform: scale(1.1);
-            background-color: rgba(0, 0, 0, 0.6); 
-        }
-
-        /* --- MODAL VIDEO --- */
+        /* Modale Video Unico */
         .video-modal {
-            display: none;
-            position: fixed; z-index: 1000;
+            display: none; position: fixed; z-index: 1000;
             left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.95);
             align-items: center; justify-content: center;
-            padding: 20px;
-            backdrop-filter: blur(10px);
+            padding: 20px; backdrop-filter: blur(10px);
         }
 
-        .modal-content-wrapper {
-            position: relative; width: 100%; max-width: 800px;
-        }
+        .modal-content-wrapper { position: relative; width: 100%; max-width: 800px; }
 
         video.modal-video {
-            width: 100%; height: auto;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            max-height: 80vh;
+            width: 100%; height: auto; border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-height: 80vh;
         }
 
         .close-btn {
@@ -179,10 +116,7 @@
 <body>
 
     <a href="index.html" class="home-btn-top" title="Torna alla Home">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
     </a>
 
     <div class="bg-image"></div>
@@ -214,16 +148,17 @@
                 <img src="PG3.png" alt="Foto 3" class="thumb-img">
             </div>
 
-             <div class="gallery-item" onclick="openVideo('marti.mp4')">
+            <div class="gallery-item" onclick="playVideo('marti.mp4')">
                 <img src="PG4_martina.png" alt="Foto 4" class="thumb-img">
                 <div class="video-badge">▶</div>
             </div>
-             <div class="gallery-item" onclick="openVideo('marc.mp4')">
+
+            <div class="gallery-item" onclick="playVideo('marc.mp4')">
                 <img src="PG4_marco.png" alt="Foto 2" class="thumb-img">
                 <div class="video-badge">▶</div>
             </div>
 
-             <div class="gallery-item" onclick="openVideo('halloween.mp4')">
+            <div class="gallery-item" onclick="playVideo('halloween.mp4')">
                 <img src="pg5.png" alt="Foto 3" class="thumb-img">
                 <div class="video-badge">▶</div>
             </div>
@@ -231,11 +166,13 @@
              <div class="gallery-item">
                 <img src="PG6.png" alt="Foto 4" class="thumb-img">
             </div>
-             <div class="gallery-item" onclick="openVideo('uscita.mp4')">
+
+            <div class="gallery-item" onclick="playVideo('uscita.mp4')">
                 <img src="PG7.png" alt="Foto 4" class="thumb-img">
                 <div class="video-badge">▶</div>
             </div>
-             <div class="gallery-item" onclick="openVideo('Mood.mp4')">
+
+            <div class="gallery-item" onclick="playVideo('Mood.mp4')">
                 <img src="PG8.png" alt="Foto 4" class="thumb-img">
                 <div class="video-badge">▶</div>
             </div>
@@ -245,73 +182,45 @@
             </div>
             <div class="gallery-item">
                 <img src="PG10.png" alt="Foto 4" class="thumb-img">
-                
             </div>
 
         </div>
 
         <a href="index.html" class="btn-back">← Torna alla Home</a>
-
     </div>
 
-
-    <div id="video1" class="video-modal">
+    <div id="videoPlayerModal" class="video-modal">
         <div class="modal-content-wrapper">
-            <span class="close-btn" onclick="closeVideo('video1')">&times;</span>
-            <video controls class="modal-video">
-                <source src="" type="video/mp4"> 
-            </video>
-        </div>
-    </div>
-
-    <div id="video2" class="video-modal">
-        <div class="modal-content-wrapper">
-            <span class="close-btn" onclick="closeVideo('video2')">&times;</span>
-            <video controls class="modal-video">
+            <span class="close-btn" onclick="stopVideo()">&times;</span>
+            <video id="mainVideo" controls class="modal-video">
                 <source src="" type="video/mp4">
             </video>
         </div>
     </div>
-    
-    <div id="video3" class="video-modal">
-        <div class="modal-content-wrapper">
-            <span class="close-btn" onclick="closeVideo('video3')">&times;</span>
-            <video controls class="modal-video">
-                <source src="" type="video/mp4">
-            </video>
-        </div>
-    </div>
-
-    <div id="video4" class="video-modal">
-        <div class="modal-content-wrapper">
-            <span class="close-btn" onclick="closeVideo('video4')">&times;</span>
-            <video controls class="modal-video">
-                <source src="" type="video/mp4">
-            </video>
-        </div>
-    </div>
-
 
     <script>
-        function openVideo(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.style.display = "flex";
-                const video = modal.querySelector('video');
-                if(video) video.play(); 
-            }
+        // Funzione semplificata: prende il nome del file e lo fa partire
+        function playVideo(nomeFile) {
+            var modal = document.getElementById('videoPlayerModal');
+            var video = document.getElementById('mainVideo');
+            
+            // Imposta il file video corretto
+            video.src = nomeFile;
+            
+            // Mostra il player e avvia
+            modal.style.display = "flex";
+            video.play();
         }
 
-        function closeVideo(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.style.display = "none";
-                const video = modal.querySelector('video');
-                if(video) {
-                    video.pause();
-                    video.currentTime = 0;
-                }
-            }
+        // Funzione per chiudere e stoppare
+        function stopVideo() {
+            var modal = document.getElementById('videoPlayerModal');
+            var video = document.getElementById('mainVideo');
+            
+            modal.style.display = "none";
+            video.pause();
+            video.currentTime = 0;
+            video.src = ""; // Pulisce
         }
     </script>
 
