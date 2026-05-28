@@ -1,1 +1,384 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Un-Protected | Oltre la Prigione Scenica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === CSS VARIABLES & RESET === */
+        :root {
+            --bg-dark: #070707;
+            --text-light: #f4f4f4;
+            --text-dark: #070707;
+            --accent: #ccff00; /* Neon Lime - la vitalità che irrompe */
+            --accent-muted: #88aa00;
+            
+            --font-display: 'Anton', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            line-height: 1;
+            letter-spacing: 1px;
+        }
+
+        .serif { font-family: var(--font-serif); font-style: italic; }
+
+        /* === 1. HERO SECTION (Brutalista, solo tipografia) === */
+        .hero {
+            height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            position: relative; padding: 2rem;
+            background-color: var(--bg-dark);
+            /* Sottile effetto texture per dare un feeling editoriale/stampato */
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(204, 255, 0, 0.05) 0%, transparent 60%),
+                url('data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E');
+        }
+
+        .hero h1 { font-size: clamp(4rem, 12vw, 12rem); margin-bottom: 1.5rem; z-index: 2; line-height: 0.9; }
+        .hero h1 span { color: var(--accent); display: block; }
+
+        .hero .sub-heading {
+            font-size: clamp(1.2rem, 3vw, 2.2rem); max-width: 900px; margin-bottom: 3rem;
+            opacity: 0; transform: translateY(20px); animation: fadeUp 1s ease 0.5s forwards; z-index: 2;
+        }
+
+        .scroll-indicator {
+            position: absolute; bottom: 3rem; font-family: var(--font-body); text-transform: uppercase;
+            letter-spacing: 3px; font-size: 0.8rem; color: var(--accent);
+            animation: bounce 2s infinite; font-weight: bold;
+        }
+
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+
+        /* === 2. LA DICHIARAZIONE (IL PARADOSSO) === */
+        .explanation { padding: 8rem 2rem; max-width: 1000px; margin: 0 auto; border-top: 1px solid #222; }
+        .explanation h2 { font-size: clamp(2.5rem, 5vw, 5rem); color: var(--accent); margin-bottom: 3rem; }
+        .explanation p { font-size: clamp(1.2rem, 2.5vw, 2rem); line-height: 1.5; margin-bottom: 2rem; font-family: var(--font-serif); }
+        .explanation .highlight {
+            font-family: var(--font-body); font-weight: 600; background: var(--text-light);
+            color: var(--text-dark); padding: 0.2rem 0.5rem; font-style: normal;
+        }
+
+        /* === 3. MANIFESTO (SPLIT SCREEN) === */
+        .manifesto { display: grid; grid-template-columns: 1fr; border-top: 1px solid #333; }
+        @media (min-width: 768px) { .manifesto { grid-template-columns: 1fr 1fr; } }
+
+        .split-col { padding: 6rem 3rem; display: flex; flex-direction: column; justify-content: center; transition: all 0.5s ease; }
+        .col-unesco { background: var(--text-light); color: var(--text-dark); border-right: 1px solid #333; }
+        .col-life { background: var(--bg-dark); color: var(--text-light); position: relative; }
+        .col-life:hover { background: var(--accent); color: var(--text-dark); }
+
+        .manifesto h3 { font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 1.5rem; }
+        .manifesto p { font-size: 1.2rem; line-height: 1.6; max-width: 400px; }
+        .tagolo { font-family: var(--font-body); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; opacity: 0.7; }
+
+        /* === 4. VERSUS COMPARATOR: STRAPPA LA CARTOLINA === */
+        .versus-section { padding: 8rem 2rem; text-align: center; background: #050505; }
+        .versus-section h2 { font-size: clamp(3rem, 5vw, 5rem); margin-bottom: 1rem; }
+        .versus-desc { font-family: var(--font-serif); font-size: 1.5rem; color: #888; margin-bottom: 4rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+
+        /* Struttura Slider Corretta e Robusta */
+        .comparison-slider {
+            position: relative; 
+            width: 100%; 
+            max-width: 1000px; 
+            aspect-ratio: 16 / 9; /* Garantisce che non si rompa mai su schermi diversi */
+            margin: 0 auto;
+            border: 2px solid #333;
+            background: #111; /* Fallback se le immagini non caricano subito */
+        }
+
+        .slider-label {
+            position: absolute; top: 1.5rem; padding: 0.5rem 1rem; font-family: var(--font-display);
+            font-size: clamp(1.2rem, 3vw, 2.5rem); text-transform: uppercase; z-index: 4; pointer-events: none;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.9); transition: opacity 0.3s;
+        }
+        .label-unesco { left: 1.5rem; color: var(--text-light); }
+        .label-life { right: 1.5rem; color: var(--accent); opacity: 0; }
+
+        .comp-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+        .img-before { z-index: 1; }
+        .img-after { z-index: 2; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); }
+
+        .slider-range { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            z-index: 10; opacity: 0; cursor: ew-resize; margin: 0;
+        }
+        
+        .slider-line { 
+            position: absolute; top: 0; left: 50%; width: 4px; height: 100%; 
+            background: var(--accent); z-index: 3; transform: translateX(-50%); pointer-events: none; 
+        }
+        
+        .slider-button {
+            position: absolute; top: 50%; left: 50%; width: 60px; height: 60px; background: var(--accent);
+            border-radius: 50%; transform: translate(-50%, -50%); z-index: 3; pointer-events: none;
+            display: flex; align-items: center; justify-content: center; color: var(--text-dark);
+            font-weight: bold; font-family: var(--font-body); font-size: 0.8rem; text-transform: uppercase;
+            box-shadow: 0 0 20px rgba(204, 255, 0, 0.4);
+        }
+
+        /* === 5. LA GUIDA ALL'INASPETTATO (I FILTRI) === */
+        .map-section { padding: 8rem 2rem; border-top: 1px dashed #333; background: #111; }
+        .map-section h2 { text-align: center; margin-bottom: 1rem; font-size: clamp(2.5rem, 4vw, 4rem); }
+        .map-section > p { text-align: center; font-family: var(--font-serif); color: #888; margin-bottom: 3rem; font-size: 1.2rem; }
+
+        .map-ui { max-width: 1000px; margin: 0 auto; border: 1px solid #333; padding: 3rem; background: var(--bg-dark); }
+        .filters { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; justify-content: center; }
+        
+        .chip {
+            padding: 1rem 2rem; border: 1px solid #555; background: transparent;
+            color: var(--text-light); cursor: pointer; font-family: var(--font-display); 
+            font-size: 1.2rem; letter-spacing: 1px; transition: all 0.3s;
+        }
+        .chip:hover, .chip.active { background: var(--text-light); color: var(--text-dark); border-color: var(--text-light); }
+
+        .map-content {
+            min-height: 200px; display: flex; flex-direction: column; justify-content: center;
+            border-left: 4px solid var(--accent); padding-left: 2rem; color: #ccc;
+        }
+        .map-content h4 { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; }
+        .map-content p { font-family: var(--font-serif); font-size: 1.4rem; line-height: 1.5; }
+
+        /* === 6. VOCABOLARIO DELLA BISOCIAZIONE (Riscritto per essere 100% stabile) === */
+        .bisociation-section { padding: 8rem 2rem; max-width: 1000px; margin: 0 auto; }
+        .bisociation-section h2 { text-align: center; font-size: clamp(3rem, 5vw, 5rem); margin-bottom: 4rem; }
+        
+        /* Struttura a righe solide invece di grid complessa */
+        .bisoc-row {
+            display: flex; flex-direction: column; text-align: center; margin-bottom: 2rem;
+            border-bottom: 1px solid #222; padding-bottom: 2rem;
+        }
+
+        .b-unesco { color: #888; }
+        .b-vs { color: var(--text-light); font-family: var(--font-display); font-size: 1.5rem; margin: 1.5rem 0; }
+        .b-life { color: var(--accent); }
+
+        .bisoc-row h4 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .bisoc-row p { font-family: var(--font-serif); font-size: 1.1rem; }
+
+        @media (min-width: 768px) {
+            .bisoc-row { flex-direction: row; align-items: center; text-align: left; margin-bottom: 3rem; padding-bottom: 3rem; }
+            .b-unesco { flex: 1; text-align: right; padding-right: 3rem; }
+            .b-vs { width: 60px; text-align: center; font-size: 2rem; margin: 0; }
+            .b-life { flex: 1; padding-left: 3rem; }
+        }
+
+        /* === 7. FOOTER === */
+        .footer-claim { text-align: center; padding: 8rem 2rem; border-top: 10px solid var(--accent); background: #000; }
+        .footer-claim h1 { font-size: clamp(2.5rem, 6vw, 6rem); line-height: 1.1; max-width: 1000px; margin: 0 auto; }
+        .footer-claim .serif { display: block; margin-top: 2rem; color: var(--accent); font-size: clamp(1.2rem, 3vw, 2.5rem); }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <!-- 1. HERO (Brutalista e Tipografica) -->
+    <header class="hero">
+        <h1>Oltre la<br><span>Prigione</span> Scenica</h1>
+        <p class="sub-heading serif">Smetti di viaggiare per confermare un'aspettativa. Lasciati attraversare da ciò che accade davvero.</p>
+        <div class="scroll-indicator">Esplora la verità</div>
+    </header>
+
+    <!-- 2. IL PARADOSSO (Dal brief) -->
+    <section class="explanation reveal">
+        <h2>La Tassidermia Urbana</h2>
+        <p>Per paradosso, più cerchiamo luoghi autentici, più li costringiamo a essere identici all'idea che noi pensiamo dovrebbero avere. La forma che deve avere un luogo per essere "autentico" diventa una gabbia.</p>
+        <p>L'iper-tutela non protegge, ma <span class="highlight">museifica</span>. I luoghi garantiti sono costretti a recitare se stessi all'infinito a beneficio del turista, perdendo la capacità di evolversi.</p>
+    </section>
+
+    <!-- 3. MANIFESTO -->
+    <section id="manifesto" class="manifesto reveal">
+        <div class="split-col col-unesco">
+            <div class="tagolo">L'Aspettativa (Luoghi UNESCO)</div>
+            <h3>La Recita<br>Perfetta</h3>
+            <p>Tutto è conservato in modo maniacale, ma bloccato. Non c'è spazio per l'errore, né per la novità: solo per la conferma di ciò che sai già.</p>
+        </div>
+        <div class="split-col col-life">
+            <div class="tagolo">L'Inaspettato (Luoghi NON-UNESCO/tutelati)</div>
+            <h3>Il Valore<br>dell'Assenza</h3>
+            <p>L'assenza di monumentalizzazione coincide con la libertà. Qui un luogo può sorprenderti. È la vita viva, caotica e in trasformazione.</p>
+        </div>
+    </section>
+
+    <!-- 4. VERSUS: STRAPPA LA CARTOLINA -->
+    <section class="versus-section reveal">
+        <h2>Strappa la Cartolina</h2>
+        <p class="versus-desc">Trascina il cursore. Dietro l'immobilità romantica e finta dell'aspettativa turistica, scopri la verità del vivere urbano.</p>
+        
+        <div class="comparison-slider">
+            <div class="slider-label label-unesco" id="labelUnesco">La Prigione Scenica</div>
+            <div class="slider-label label-life" id="labelLife">La Vitalità Urbana</div>
+
+            <!-- Immagine Sfondo: UNESCO (Statica, monumentale) -->
+            <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1600&q=80" alt="L'illusione scenica" class="comp-img img-before">
+            
+            <!-- Immagine Sopra: NON-UNESCO (Vita di strada, caotica) -->
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80" alt="La realtà vitale" class="comp-img img-after" id="imgAfter">
+            
+            <input type="range" min="0" max="100" value="50" class="slider-range" id="sliderRange">
+            <div class="slider-line" id="sliderLine"></div>
+            <div class="slider-button" id="sliderButton">↔</div>
+        </div>
+    </section>
+
+    <!-- 5. LA GUIDA ALL'INASPETTATO (I FILTRI DECOSTRUTTORI) -->
+    <section class="map-section reveal">
+        <h2>Decostruisci l'Autentico</h2>
+        <p>Seleziona ciò che un turista cerca di solito, e scopri la risposta della città viva.</p>
+        
+        <div class="map-ui">
+            <div class="filters">
+                <button class="chip active" data-target="tradizione">Cerco la Tradizione</button>
+                <button class="chip" data-target="autenticita">Voglio l'Autenticità</button>
+                <button class="chip" data-target="storia">Voglio la Storia</button>
+            </div>
+            <div class="map-content" id="mapContent">
+                <h4>Il Kebabbaro a Montmartre</h4>
+                <p>"Chi ha stabilito la forma che deve avere Montmartre per essere autentica? La presenza di un kebabbaro o di una startup non è un errore, è il segno inequivocabile di un luogo vivo e non museificato."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. IL VOCABOLARIO DELLA BISOCIAZIONE (Struttura Stabile a Righe) -->
+    <section class="bisociation-section reveal">
+        <h2>Da Mancanza a Valore</h2>
+        
+        <div class="bisoc-row">
+            <div class="b-unesco">
+                <h4>Museificazione</h4>
+                <p>Congelare un luogo per esporlo.</p>
+            </div>
+            <div class="b-vs">VS</div>
+            <div class="b-life">
+                <h4>Vitalità Urbana</h4>
+                <p>La libertà di evolvere e sbagliare.</p>
+            </div>
+        </div>
+
+        <div class="bisoc-row">
+            <div class="b-unesco">
+                <h4>Aspettativa</h4>
+                <p>Cercare conferme di ciò che si sa già.</p>
+            </div>
+            <div class="b-vs">VS</div>
+            <div class="b-life">
+                <h4>Inaspettatezza</h4>
+                <p>Farsi attraversare dallo stupore puro.</p>
+            </div>
+        </div>
+
+        <div class="bisoc-row" style="border-bottom: none;">
+            <div class="b-unesco">
+                <h4>Coerenza Fissa</h4>
+                <p>Recitare se stessi all'infinito.</p>
+            </div>
+            <div class="b-vs">VS</div>
+            <div class="b-life">
+                <h4>Trasformazione</h4>
+                <p>Sopravvivere cambiando pelle ogni giorno.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FOOTER -->
+    <footer class="footer-claim">
+        <h1>Visita i luoghi non per confermare un'aspettativa</h1>
+        <span class="serif">Ma per lasciarti attraversare da ciò che accade davvero.</span>
+    </footer>
+
+    <script>
+        // --- Image Comparison Slider Logica Corretta ---
+        const slider = document.getElementById('sliderRange');
+        const imgAfter = document.getElementById('imgAfter');
+        const sliderLine = document.getElementById('sliderLine');
+        const sliderButton = document.getElementById('sliderButton');
+        const labelUnesco = document.getElementById('labelUnesco');
+        const labelLife = document.getElementById('labelLife');
+
+        slider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            // La clip-path rivela l'immagine "After" da sinistra a destra
+            imgAfter.style.clipPath = `polygon(0 0, ${val}% 0, ${val}% 100%, 0 100%)`;
+            sliderLine.style.left = `${val}%`;
+            sliderButton.style.left = `${val}%`;
+
+            // Dissolvenza dinamica delle etichette
+            labelUnesco.style.opacity = (100 - val) / 100;
+            labelLife.style.opacity = val / 100;
+        });
+
+        // --- Filter Chips Logic (Il Decostruttore) ---
+        const chips = document.querySelectorAll('.chip');
+        const mapContent = document.getElementById('mapContent');
+
+        const decostruzioni = {
+            tradizione: {
+                titolo: "Il Kebabbaro a Montmartre",
+                testo: '"Chi ha stabilito la forma che deve avere Montmartre per essere autentica? La presenza di un kebabbaro o di una startup non è un errore, è il segno inequivocabile di un luogo vivo e non museificato."'
+            },
+            autenticita: {
+                titolo: "L'Autentico è un Paradosso",
+                testo: '"Più cerchi un luogo autentico, più pretendi che reciti per te l\'idea che te ne sei fatto. L\'assenza di tutela significa che il luogo non deve performare per te. Può semplicemente esistere."'
+            },
+            storia: {
+                titolo: "La Storia non è un Fossile",
+                testo: '"La monumentalizzazione blocca il tempo. Un luogo NON-UNESCO ti dimostra che la vera storia umana è fatta di stratificazioni, caos e continui ribaltamenti urbani."'
+            }
+        };
+
+        chips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                chips.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                
+                const target = this.getAttribute('data-target');
+                
+                mapContent.style.opacity = 0;
+                setTimeout(() => {
+                    mapContent.innerHTML = `
+                        <h4>${decostruzioni[target].titolo}</h4>
+                        <p>${decostruzioni[target].testo}</p>
+                    `;
+                    mapContent.style.opacity = 1;
+                }, 300);
+            });
+        });
+
+        // --- Scroll Reveal Animations ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>
