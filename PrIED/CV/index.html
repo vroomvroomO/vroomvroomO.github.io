@@ -137,14 +137,17 @@
 
         .comp-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
         .img-before { z-index: 1; }
-        .img-after { z-index: 2; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); }
+        /* MODIFICA: clip-path impostato a 0% per mostrare solo l'immagine fissa all'inizio */
+        .img-after { z-index: 2; clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%); }
 
         .slider-range { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; opacity: 0; cursor: ew-resize; margin: 0; }
         
-        .slider-line { position: absolute; top: 0; left: 50%; width: 6px; height: 100%; background: var(--accent); z-index: 3; transform: translateX(-50%); pointer-events: none; }
+        /* MODIFICA: left impostato a 0% */
+        .slider-line { position: absolute; top: 0; left: 0%; width: 6px; height: 100%; background: var(--accent); z-index: 3; transform: translateX(-50%); pointer-events: none; }
         
+        /* MODIFICA: left impostato a 0% */
         .slider-button {
-            position: absolute; top: 50%; left: 50%; width: 60px; height: 60px; background: var(--accent);
+            position: absolute; top: 50%; left: 0%; width: 60px; height: 60px; background: var(--accent);
             border-radius: 0%; transform: translate(-50%, -50%) rotate(45deg); z-index: 3; pointer-events: none;
             display: flex; align-items: center; justify-content: center; color: var(--text-dark);
             box-shadow: 0 0 30px rgba(204, 255, 0, 0.5);
@@ -175,7 +178,7 @@
         .map-content h4 { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; }
         .map-content p { font-family: var(--font-serif); font-size: 1.4rem; line-height: 1.5; }
 
-        /* === 6. SEZIONE VIDEO (Aggiunta esatta richiesta) === */
+        /* === 6. SEZIONE VIDEO === */
         .video-section { padding: 8rem 2rem; border-top: 1px dashed #333; background: #050505; }
         .video-section h2 { text-align: center; margin-bottom: 1rem; font-size: clamp(2.5rem, 4vw, 4rem); }
         .video-section > p { text-align: center; font-family: var(--font-serif); color: #888; margin-bottom: 4rem; font-size: 1.2rem; }
@@ -188,8 +191,23 @@
         .video-wrapper:hover .video-label { color: var(--accent); }
         .video-format { font-family: var(--font-body); font-size: 0.8rem; font-weight: bold; color: #666; }
 
+        /* === 6.5 CAROSELLO IMMAGINI (NUOVA SEZIONE) === */
+        .carousel-section { padding: 4rem 2rem 8rem 2rem; background: #050505; }
+        .carousel-wrapper {
+            display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 2rem;
+            scroll-snap-type: x mandatory; scrollbar-width: none; /* Firefox */
+        }
+        .carousel-wrapper::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
+        .carousel-slide {
+            flex: 0 0 auto; width: 85%; max-width: 600px; aspect-ratio: 16/9;
+            scroll-snap-align: center; border: 1px solid #333; background: #111;
+        }
+        .carousel-slide img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+        }
+
         /* === 7. VOCABOLARIO DELLA BISOCIAZIONE === */
-        .bisociation-section { padding: 8rem 2rem; max-width: 1000px; margin: 0 auto; }
+        .bisociation-section { padding: 8rem 2rem; max-width: 1000px; margin: 0 auto; border-top: 1px dashed #333; }
         .bisociation-section h2 { text-align: center; font-size: clamp(3rem, 5vw, 5rem); margin-bottom: 4rem; }
         
         .bisoc-row {
@@ -224,24 +242,24 @@
 
     <header class="hero">
         <h1>Break The<br><span>Postcard.</span></h1>
-        <p class="sub-heading serif">Il turismo è diventato una collezione di fondali finti. Smetti di viaggiare per confermare un'aspettativa e lasciati attraversare dalla realtà.</p>
+        <p class="sub-heading serif">Smetti di viaggiare per confermare un'aspettativa e lasciati stupire dalla realtà.</p>
         <div class="scroll-indicator">Rompi lo schema</div>
     </header>
 
     <section class="explanation reveal">
         <h2>La Prigione Scenica</h2>
-        <p>Per paradosso, più cerchiamo luoghi autentici, più li costringiamo a essere identici all'idea che noi pensiamo dovrebbero avere. La forma che deve avere un luogo per essere "autentico" diventa una <span class="highlight">cartolina bidimensionale</span>.</p>
-        <p>L'iper-tutela non protegge, ma museifica. I luoghi garantiti sono costretti a recitare se stessi all'infinito a beneficio del turista, perdendo la capacità di evolversi.</p>
+        <p>Per paradosso, più cerchiamo luoghi autentici, più li costringiamo a essere identici all'idea che noi pensiamo dovrebbero avere. La forma che deve avere un luogo per essere "autentico" diventa una <span class="highlight">cartolina sempre uguale</span>.</p>
+        <p>L'iper-tutela non protegge, ma <span class="highlight"> museifica.</span> I luoghi garantiti sono costretti a recitare se stessi all'infinito a beneficio del turista, perdendo la capacità di evolversi.</p>
     </section>
 
     <section id="manifesto" class="manifesto reveal">
         <div class="split-col col-unesco">
-            <div class="tagolo">L'Aspettativa (Luoghi Tutelati)</div>
+            <div class="tagolo">L'Aspettativa (Luoghi UNESCO)</div>
             <h3>La Cartolina<br>Perfetta</h3>
             <p>Tutto è conservato in modo maniacale, ma bloccato. Non c'è spazio per l'errore, né per la novità. È un'immagine piatta creata solo per confermare ciò che sai già.</p>
         </div>
         <div class="split-col col-life">
-            <div class="tagolo">L'Inaspettato (Luoghi NON-Tutelati)</div>
+            <div class="tagolo">L'Inaspettato (Luoghi NON-UNESCO)</div>
             <h3>La Verità<br>Urbana</h3>
             <p>L'assenza di monumentalizzazione coincide con la libertà. Qui un luogo può sorprenderti. È il "lato B", la vita caotica e in trasformazione che non entra nell'inquadratura turistica.</p>
         </div>
@@ -249,20 +267,21 @@
 
     <section class="versus-section reveal">
         <h2>Strappa la Cartolina</h2>
-        <p class="versus-desc">Trascina il cursore per lacerare l'immobilità romantica dell'aspettativa turistica e scoprire la cruda verità del vivere urbano.</p>
+        <p class="versus-desc">Trascina il cursore per rompere la cartolina e vivere la vera esperienza</p>
         
         <div class="comparison-slider">
             <div class="slider-label label-unesco" id="labelUnesco">L'Immagine Fissa</div>
             <div class="slider-label label-life" id="labelLife">La Città Viva</div>
 
-            <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1600&q=80" alt="L'illusione scenica" class="comp-img img-before">
+            <img src="https://www.ttgitalia.com/binrepository/871x654/0c0/871d653/none/363887196/PVUH/2015_11_15688_161_TG314081_MG472412839.jpg" alt="L'illusione scenica" class="comp-img img-before">
             
-            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80" alt="La realtà vitale" class="comp-img img-after" id="imgAfter">
+            <img src="https://media.istockphoto.com/id/502636264/photo/metro-station-arts-et-métiers-paris-france.jpg?s=612x612&w=0&k=20&c=wwUhvV6md_MYZb-9zOhI2qrh8UQri0vt6MbXu7ar-Lk=" alt="La realtà vitale" class="comp-img img-after" id="imgAfter">
             
-            <input type="range" min="0" max="100" value="50" class="slider-range" id="sliderRange">
+            <input type="range" min="0" max="100" value="0" class="slider-range" id="sliderRange">
             <div class="slider-line" id="sliderLine"></div>
             <div class="slider-button" id="sliderButton"><span>↔</span></div>
         </div>
+        <p class="sub-heading serif" style="margin-top: 2rem;">Da un lato la Parigi da cartolina, dall'altra la bellissima fermata metro "art et metiers" di parigi, un luogo di vita, bellezza ed esperienza</p>
     </section>
 
     <section class="map-section reveal">
@@ -289,20 +308,27 @@
         <div class="video-grid">
             <div class="video-wrapper">
                 <video src="video/video1.mp4" controls preload="metadata"></video>
-                <div class="video-label"><span>Video_01</span><span class="video-format">.MP4</span></div>
             </div>
             <div class="video-wrapper">
                 <video src="video/video2.mp4" controls preload="metadata"></video>
-                <div class="video-label"><span>Video_02</span><span class="video-format">.MP4</span></div>
             </div>
             <div class="video-wrapper">
                 <video src="video/video3.mp4" controls preload="metadata"></video>
-                <div class="video-label"><span>Video_03</span><span class="video-format">.MP4</span></div>
             </div>
             <div class="video-wrapper">
                 <video src="video/video4.mp4" controls preload="metadata"></video>
-                <div class="video-label"><span>Video_04</span><span class="video-format">.MP4</span></div>
             </div>
+        </div>
+    </section>
+<p class="sub-heading serif" >E i nostri caroselli.</p>
+    <section class="carousel-section reveal">
+        
+        <div class="carousel-wrapper">
+            
+            <div class="carousel-slide"><img src="video/img1.png" alt="Traccia Visiva 1"></div>
+            <div class="carousel-slide"><img src="video/img2.png" alt="Traccia Visiva 2"></div>
+            <div class="carousel-slide"><img src="video/img3.png" alt="Traccia Visiva 3"></div>
+        
         </div>
     </section>
 
