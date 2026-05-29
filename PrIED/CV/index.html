@@ -175,7 +175,20 @@
         .map-content h4 { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; }
         .map-content p { font-family: var(--font-serif); font-size: 1.4rem; line-height: 1.5; }
 
-        /* === 6. VOCABOLARIO DELLA BISOCIAZIONE === */
+        /* === 6. SEZIONE VIDEO (Aggiunta esatta richiesta) === */
+        .video-section { padding: 8rem 2rem; border-top: 1px dashed #333; background: #050505; }
+        .video-section h2 { text-align: center; margin-bottom: 1rem; font-size: clamp(2.5rem, 4vw, 4rem); }
+        .video-section > p { text-align: center; font-family: var(--font-serif); color: #888; margin-bottom: 4rem; font-size: 1.2rem; }
+        .video-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1000px; margin: 0 auto; }
+        @media (min-width: 768px) { .video-grid { grid-template-columns: 1fr 1fr; } }
+        .video-wrapper { border: 1px solid #333; background: #111; padding: 1rem; transition: border-color 0.3s ease; }
+        .video-wrapper:hover { border-color: var(--accent); }
+        .video-wrapper video { width: 100%; display: block; outline: none; background: #000; }
+        .video-label { margin-top: 1rem; font-family: var(--font-display); color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; font-size: 1.5rem; display: flex; justify-content: space-between; align-items: baseline; }
+        .video-wrapper:hover .video-label { color: var(--accent); }
+        .video-format { font-family: var(--font-body); font-size: 0.8rem; font-weight: bold; color: #666; }
+
+        /* === 7. VOCABOLARIO DELLA BISOCIAZIONE === */
         .bisociation-section { padding: 8rem 2rem; max-width: 1000px; margin: 0 auto; }
         .bisociation-section h2 { text-align: center; font-size: clamp(3rem, 5vw, 5rem); margin-bottom: 4rem; }
         
@@ -198,7 +211,7 @@
             .b-life { flex: 1; padding-left: 3rem; }
         }
 
-        /* === 7. FOOTER === */
+        /* === 8. FOOTER === */
         .footer-claim { text-align: center; padding: 8rem 2rem; border-top: 10px solid var(--accent); background: #000; }
         .footer-claim h1 { font-size: clamp(2.5rem, 6vw, 6rem); line-height: 1.1; max-width: 1000px; margin: 0 auto; }
         .footer-claim .serif { display: block; margin-top: 2rem; color: var(--accent); font-size: clamp(1.2rem, 3vw, 2.5rem); }
@@ -209,23 +222,18 @@
 </head>
 <body>
 
-
-
-    <!-- 1. HERO -->
     <header class="hero">
         <h1>Break The<br><span>Postcard.</span></h1>
         <p class="sub-heading serif">Il turismo è diventato una collezione di fondali finti. Smetti di viaggiare per confermare un'aspettativa e lasciati attraversare dalla realtà.</p>
         <div class="scroll-indicator">Rompi lo schema</div>
     </header>
 
-    <!-- 2. IL PARADOSSO -->
     <section class="explanation reveal">
         <h2>La Prigione Scenica</h2>
         <p>Per paradosso, più cerchiamo luoghi autentici, più li costringiamo a essere identici all'idea che noi pensiamo dovrebbero avere. La forma che deve avere un luogo per essere "autentico" diventa una <span class="highlight">cartolina bidimensionale</span>.</p>
         <p>L'iper-tutela non protegge, ma museifica. I luoghi garantiti sono costretti a recitare se stessi all'infinito a beneficio del turista, perdendo la capacità di evolversi.</p>
     </section>
 
-    <!-- 3. MANIFESTO -->
     <section id="manifesto" class="manifesto reveal">
         <div class="split-col col-unesco">
             <div class="tagolo">L'Aspettativa (Luoghi Tutelati)</div>
@@ -239,7 +247,6 @@
         </div>
     </section>
 
-    <!-- 4. VERSUS: STRAPPA LA CARTOLINA -->
     <section class="versus-section reveal">
         <h2>Strappa la Cartolina</h2>
         <p class="versus-desc">Trascina il cursore per lacerare l'immobilità romantica dell'aspettativa turistica e scoprire la cruda verità del vivere urbano.</p>
@@ -248,20 +255,16 @@
             <div class="slider-label label-unesco" id="labelUnesco">L'Immagine Fissa</div>
             <div class="slider-label label-life" id="labelLife">La Città Viva</div>
 
-            <!-- Immagine Sfondo: UNESCO (Statica, monumentale) -->
             <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1600&q=80" alt="L'illusione scenica" class="comp-img img-before">
             
-            <!-- Immagine Sopra: NON-UNESCO (Vita di strada, caotica) -->
             <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80" alt="La realtà vitale" class="comp-img img-after" id="imgAfter">
             
             <input type="range" min="0" max="100" value="50" class="slider-range" id="sliderRange">
             <div class="slider-line" id="sliderLine"></div>
-            <!-- Bottone squadrato per sembrare una lama/taglio -->
             <div class="slider-button" id="sliderButton"><span>↔</span></div>
         </div>
     </section>
 
-    <!-- 5. LA GUIDA ALL'INASPETTATO (I FILTRI DECOSTRUTTORI) -->
     <section class="map-section reveal">
         <h2>Decostruisci l'Autentico</h2>
         <p>Seleziona ciò che un turista cerca di solito, e guarda come la realtà strappa quell'aspettativa.</p>
@@ -279,7 +282,30 @@
         </div>
     </section>
 
-    <!-- 6. IL VOCABOLARIO DELLA BISOCIAZIONE -->
+    <section class="video-section reveal">
+        <h2>i nostri POV</h2>
+        <p>La nostra campagna social.</p>
+        
+        <div class="video-grid">
+            <div class="video-wrapper">
+                <video src="video/video1.mp4" controls preload="metadata"></video>
+                <div class="video-label"><span>Video_01</span><span class="video-format">.MP4</span></div>
+            </div>
+            <div class="video-wrapper">
+                <video src="video/video2.mp4" controls preload="metadata"></video>
+                <div class="video-label"><span>Video_02</span><span class="video-format">.MP4</span></div>
+            </div>
+            <div class="video-wrapper">
+                <video src="video/video3.mp4" controls preload="metadata"></video>
+                <div class="video-label"><span>Video_03</span><span class="video-format">.MP4</span></div>
+            </div>
+            <div class="video-wrapper">
+                <video src="video/video4.mp4" controls preload="metadata"></video>
+                <div class="video-label"><span>Video_04</span><span class="video-format">.MP4</span></div>
+            </div>
+        </div>
+    </section>
+
     <section class="bisociation-section reveal">
         <h2>Da Mancanza a Valore</h2>
         
@@ -320,7 +346,6 @@
         </div>
     </section>
 
-    <!-- 7. FOOTER -->
     <footer class="footer-claim">
         <h1>Non viaggiare per collezionare cartoline.</h1>
         <span class="serif">Viaggia per la verità del vivere urbano.</span>
