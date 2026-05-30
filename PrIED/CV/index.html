@@ -123,9 +123,7 @@
         .versus-desc { font-family: var(--font-serif); font-size: 1.5rem; color: #888; margin-bottom: 4rem; max-width: 800px; margin-left: auto; margin-right: auto; }
 
         .comparison-slider {
-            position: relative; width: 100%; 
-            max-width: 800px; /* Ridotto da 1000px a 800px per non essere enorme da PC */
-            aspect-ratio: 16 / 9; margin: 0 auto;
+            position: relative; width: 100%; max-width: 1000px; aspect-ratio: 16 / 9; margin: 0 auto;
             border: 2px solid #333; background: #111;
         }
 
@@ -219,6 +217,7 @@
         @media (min-width: 768px) {
             .carousel-wrapper { justify-content: center; }
         }
+
 
         /* === 7. VOCABOLARIO DELLA BISOCIAZIONE === */
         .bisociation-section { padding: 8rem 2rem; max-width: 1000px; margin: 0 auto; border-top: 1px dashed #333; }
@@ -334,16 +333,14 @@
             </div>
         </div>
     </section>
-    
-    <p class="sub-heading serif" style="text-align: center;">E i nostri caroselli.</p>
-    <section class="carousel-section reveal">
+   <section class="carousel-section reveal">
+        <h2 style="text-align: center; font-size: clamp(2.5rem, 4vw, 4rem); margin-bottom: 1rem;">E I NOSTRI CAROSELLI</h2>
+        
         
         <div class="carousel-wrapper">
-            
             <div class="carousel-slide"><img src="video/img1.png" alt="Traccia Visiva 1"></div>
             <div class="carousel-slide"><img src="video/img2.png" alt="Traccia Visiva 2"></div>
             <div class="carousel-slide"><img src="video/img3.png" alt="Traccia Visiva 3"></div>
-        
         </div>
     </section>
 
