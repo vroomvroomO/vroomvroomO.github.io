@@ -195,16 +195,18 @@
         .video-wrapper:hover .video-label { color: var(--accent); }
         .video-format { font-family: var(--font-body); font-size: 0.8rem; font-weight: bold; color: #666; }
 
-        /* === 6.5 CAROSELLO IMMAGINI (Logica Corretta) === */
+        /* === 6.5 CAROSELLO IMMAGINI (Corretto per proporzioni originali) === */
         .carousel-section { padding: 8rem 2rem; background: #050505; border-top: 1px dashed #333; }
         .carousel-wrapper {
             display: flex; gap: 2rem; overflow-x: auto; padding-bottom: 2rem; padding-top: 1rem;
             scroll-snap-type: x mandatory; scrollbar-width: none; /* Firefox */
             -webkit-overflow-scrolling: touch; /* Scorrimento fluido su mobile/iOS */
+            align-items: center; /* Centra le immagini se hanno altezze diverse */
         }
         .carousel-wrapper::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
         .carousel-slide {
-            flex: 0 0 85%; max-width: 800px; aspect-ratio: 16/9;
+            flex: 0 0 85%; max-width: 800px; 
+            /* Rimosso aspect-ratio: 16/9; per far adattare la cornice */
             scroll-snap-align: center; border: 1px solid #333; background: #111;
             transition: transform 0.3s ease, border-color 0.3s ease;
         }
@@ -212,7 +214,8 @@
             transform: scale(1.02); border-color: var(--accent);
         }
         .carousel-slide img {
-            width: 100%; height: 100%; object-fit: cover; display: block;
+            width: 100%; height: auto; /* Permette all'immagine di dettare l'altezza, mostrando l'immagine intera */
+            display: block;
         }
 
         /* === 7. VOCABOLARIO DELLA BISOCIAZIONE === */
@@ -329,9 +332,10 @@
             </div>
         </div>
     </section>
-   <section class="carousel-section reveal">
+
+    <section class="carousel-section reveal">
         <h2 style="text-align: center; font-size: clamp(2.5rem, 4vw, 4rem); margin-bottom: 1rem;">E I NOSTRI CAROSELLI</h2>
-        
+        <p class="sub-heading serif" style="text-align: center; color: #888; margin-bottom: 4rem; font-size: 1.2rem;">Scorri per esplorare le tracce visive.</p>
         
         <div class="carousel-wrapper">
             <div class="carousel-slide"><img src="video/img1.png" alt="Traccia Visiva 1"></div>
