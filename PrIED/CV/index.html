@@ -123,7 +123,9 @@
         .versus-desc { font-family: var(--font-serif); font-size: 1.5rem; color: #888; margin-bottom: 4rem; max-width: 800px; margin-left: auto; margin-right: auto; }
 
         .comparison-slider {
-            position: relative; width: 100%; max-width: 1000px; aspect-ratio: 16 / 9; margin: 0 auto;
+            position: relative; width: 100%; 
+            max-width: 800px; /* Ridotto da 1000px a 800px per non essere enorme da PC */
+            aspect-ratio: 16 / 9; margin: 0 auto;
             border: 2px solid #333; background: #111;
         }
 
@@ -195,27 +197,27 @@
         .video-wrapper:hover .video-label { color: var(--accent); }
         .video-format { font-family: var(--font-body); font-size: 0.8rem; font-weight: bold; color: #666; }
 
-        /* === 6.5 CAROSELLO IMMAGINI (Corretto per proporzioni originali) === */
-        .carousel-section { padding: 8rem 2rem; background: #050505; border-top: 1px dashed #333; }
+        /* === 6.5 CAROSELLO IMMAGINI (Proporzioni originali e centratura PC) === */
+        .carousel-section { padding: 4rem 2rem 8rem 2rem; background: #050505; }
         .carousel-wrapper {
-            display: flex; gap: 2rem; overflow-x: auto; padding-bottom: 2rem; padding-top: 1rem;
+            display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 2rem;
             scroll-snap-type: x mandatory; scrollbar-width: none; /* Firefox */
-            -webkit-overflow-scrolling: touch; /* Scorrimento fluido su mobile/iOS */
             align-items: center; /* Centra le immagini se hanno altezze diverse */
         }
         .carousel-wrapper::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
         .carousel-slide {
-            flex: 0 0 85%; max-width: 800px; 
-            /* Rimosso aspect-ratio: 16/9; per far adattare la cornice */
+            flex: 0 0 auto; width: 85%; 
+            max-width: 450px; /* Ridotto da 600px a 450px per PC */
+            /* Rimosso aspect-ratio per adattarsi all'immagine vera e propria senza tagliarla */
             scroll-snap-align: center; border: 1px solid #333; background: #111;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-        .carousel-slide:hover {
-            transform: scale(1.02); border-color: var(--accent);
         }
         .carousel-slide img {
-            width: 100%; height: auto; /* Permette all'immagine di dettare l'altezza, mostrando l'immagine intera */
+            width: 100%; height: auto; /* Garantisce che non ci siano ritagli */
             display: block;
+        }
+        /* Centra il carosello su schermi grandi */
+        @media (min-width: 768px) {
+            .carousel-wrapper { justify-content: center; }
         }
 
         /* === 7. VOCABOLARIO DELLA BISOCIAZIONE === */
@@ -332,15 +334,16 @@
             </div>
         </div>
     </section>
-
+    
+    <p class="sub-heading serif" style="text-align: center;">E i nostri caroselli.</p>
     <section class="carousel-section reveal">
-        <h2 style="text-align: center; font-size: clamp(2.5rem, 4vw, 4rem); margin-bottom: 1rem;">E I NOSTRI CAROSELLI</h2>
-        <p class="sub-heading serif" style="text-align: center; color: #888; margin-bottom: 4rem; font-size: 1.2rem;">Scorri per esplorare le tracce visive.</p>
         
         <div class="carousel-wrapper">
+            
             <div class="carousel-slide"><img src="video/img1.png" alt="Traccia Visiva 1"></div>
             <div class="carousel-slide"><img src="video/img2.png" alt="Traccia Visiva 2"></div>
             <div class="carousel-slide"><img src="video/img3.png" alt="Traccia Visiva 3"></div>
+        
         </div>
     </section>
 
