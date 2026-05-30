@@ -40,7 +40,7 @@
 
         .serif { font-family: var(--font-serif); font-style: italic; }
 
-        /* === BRAND LOGO (NAVBAR) === */
+        /* === BRAND LOGO (NAVBAR) - CSS mantenuto per sicurezza ma HTML rimosso === */
         .navbar {
             position: absolute;
             top: 0;
@@ -137,15 +137,12 @@
 
         .comp-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
         .img-before { z-index: 1; }
-        /* MODIFICA: clip-path impostato a 0% per mostrare solo l'immagine fissa all'inizio */
         .img-after { z-index: 2; clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%); }
 
         .slider-range { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; opacity: 0; cursor: ew-resize; margin: 0; }
         
-        /* MODIFICA: left impostato a 0% */
         .slider-line { position: absolute; top: 0; left: 0%; width: 6px; height: 100%; background: var(--accent); z-index: 3; transform: translateX(-50%); pointer-events: none; }
         
-        /* MODIFICA: left impostato a 0% */
         .slider-button {
             position: absolute; top: 50%; left: 0%; width: 60px; height: 60px; background: var(--accent);
             border-radius: 0%; transform: translate(-50%, -50%) rotate(45deg); z-index: 3; pointer-events: none;
@@ -157,26 +154,33 @@
         }
 
         /* === 5. LA GUIDA ALL'INASPETTATO (I FILTRI) === */
-        .map-section { padding: 8rem 2rem; border-top: 1px dashed #333; background: #111; }
-        .map-section h2 { text-align: center; margin-bottom: 1rem; font-size: clamp(2.5rem, 4vw, 4rem); }
-        .map-section > p { text-align: center; font-family: var(--font-serif); color: #888; margin-bottom: 3rem; font-size: 1.2rem; }
+        .map-section { padding: clamp(4rem, 8vw, 8rem) 1.5rem; border-top: 1px dashed #333; background: #111; }
+        .map-section h2 { text-align: center; margin-bottom: 1rem; font-size: clamp(2.2rem, 6vw, 4rem); }
+        .map-section > p { 
+            text-align: center; font-family: var(--font-serif); color: #888; 
+            margin: 0 auto 3rem auto; font-size: clamp(1.1rem, 3.5vw, 1.4rem); line-height: 1.5; max-width: 800px; 
+        }
 
-        .map-ui { max-width: 1000px; margin: 0 auto; border: 1px solid #333; padding: 3rem; background: var(--bg-dark); }
-        .filters { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; justify-content: center; }
+        .map-ui { max-width: 1000px; margin: 0 auto; border: 1px solid #333; padding: clamp(1.5rem, 5vw, 3rem); background: var(--bg-dark); }
+        .filters { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: clamp(1.5rem, 5vw, 3rem); justify-content: center; }
         
         .chip {
-            padding: 1rem 2rem; border: 1px solid #555; background: transparent;
+            flex: 1 1 auto;
+            text-align: center;
+            padding: clamp(0.8rem, 2vw, 1rem) clamp(1rem, 3vw, 2rem); 
+            border: 1px solid #555; background: transparent;
             color: var(--text-light); cursor: pointer; font-family: var(--font-display); 
-            font-size: 1.2rem; letter-spacing: 1px; transition: all 0.3s;
+            font-size: clamp(1rem, 3vw, 1.2rem); letter-spacing: 1px; transition: all 0.3s;
         }
         .chip:hover, .chip.active { background: var(--text-light); color: var(--text-dark); border-color: var(--text-light); }
 
         .map-content {
-            min-height: 200px; display: flex; flex-direction: column; justify-content: center;
-            border-left: 4px solid var(--accent); padding-left: 2rem; color: #ccc;
+            min-height: auto; display: flex; flex-direction: column; justify-content: center;
+            border-left: 4px solid var(--accent); padding-left: clamp(1rem, 4vw, 2rem); color: #ccc;
+            padding-top: 0.5rem; padding-bottom: 0.5rem;
         }
-        .map-content h4 { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; }
-        .map-content p { font-family: var(--font-serif); font-size: 1.4rem; line-height: 1.5; }
+        .map-content h4 { font-size: clamp(1.8rem, 6vw, 2.5rem); color: var(--accent); margin-bottom: 1rem; line-height: 1.1; }
+        .map-content p { font-family: var(--font-serif); font-size: clamp(1.1rem, 4vw, 1.4rem); line-height: 1.6; }
 
         /* === 6. SEZIONE VIDEO === */
         .video-section { padding: 8rem 2rem; border-top: 1px dashed #333; background: #050505; }
@@ -191,16 +195,21 @@
         .video-wrapper:hover .video-label { color: var(--accent); }
         .video-format { font-family: var(--font-body); font-size: 0.8rem; font-weight: bold; color: #666; }
 
-        /* === 6.5 CAROSELLO IMMAGINI (NUOVA SEZIONE) === */
-        .carousel-section { padding: 4rem 2rem 8rem 2rem; background: #050505; }
+        /* === 6.5 CAROSELLO IMMAGINI (Logica Corretta) === */
+        .carousel-section { padding: 8rem 2rem; background: #050505; border-top: 1px dashed #333; }
         .carousel-wrapper {
-            display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 2rem;
+            display: flex; gap: 2rem; overflow-x: auto; padding-bottom: 2rem; padding-top: 1rem;
             scroll-snap-type: x mandatory; scrollbar-width: none; /* Firefox */
+            -webkit-overflow-scrolling: touch; /* Scorrimento fluido su mobile/iOS */
         }
         .carousel-wrapper::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
         .carousel-slide {
-            flex: 0 0 auto; width: 85%; max-width: 600px; aspect-ratio: 16/9;
+            flex: 0 0 85%; max-width: 800px; aspect-ratio: 16/9;
             scroll-snap-align: center; border: 1px solid #333; background: #111;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .carousel-slide:hover {
+            transform: scale(1.02); border-color: var(--accent);
         }
         .carousel-slide img {
             width: 100%; height: 100%; object-fit: cover; display: block;
@@ -266,12 +275,12 @@
     </section>
 
     <section class="versus-section reveal">
-        <h2>Strappa la Cartolina</h2>
+        <h2>BREAK THE POSTCARD</h2>
         <p class="versus-desc">Trascina il cursore per rompere la cartolina e vivere la vera esperienza</p>
         
         <div class="comparison-slider">
-            <div class="slider-label label-unesco" id="labelUnesco">L'Immagine Fissa</div>
-            <div class="slider-label label-life" id="labelLife">La Città Viva</div>
+            <div class="slider-label label-unesco" id="labelUnesco">La cartolina boring</div>
+            <div class="slider-label label-life" id="labelLife">Una vera experience</div>
 
             <img src="https://www.ttgitalia.com/binrepository/871x654/0c0/871d653/none/363887196/PVUH/2015_11_15688_161_TG314081_MG472412839.jpg" alt="L'illusione scenica" class="comp-img img-before">
             
@@ -320,15 +329,14 @@
             </div>
         </div>
     </section>
-<p class="sub-heading serif" >E i nostri caroselli.</p>
-    <section class="carousel-section reveal">
+   <section class="carousel-section reveal">
+        <h2 style="text-align: center; font-size: clamp(2.5rem, 4vw, 4rem); margin-bottom: 1rem;">E I NOSTRI CAROSELLI</h2>
+        
         
         <div class="carousel-wrapper">
-            
             <div class="carousel-slide"><img src="video/img1.png" alt="Traccia Visiva 1"></div>
             <div class="carousel-slide"><img src="video/img2.png" alt="Traccia Visiva 2"></div>
             <div class="carousel-slide"><img src="video/img3.png" alt="Traccia Visiva 3"></div>
-        
         </div>
     </section>
 
